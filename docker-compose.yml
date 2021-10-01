@@ -1,0 +1,15 @@
+services:
+  selenium:
+    image: selenium/standalone-chrome
+    hostname: selenium
+    privileged: true
+    shm_size: 2g
+    ports:
+      - "4444:4444"
+  test:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    depends_on: 
+      - "selenium"
+    command: mvn install
